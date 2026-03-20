@@ -1,12 +1,72 @@
 .alert {
-  top: 1.25rem;
-  right: 1.25rem;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
   z-index: 1055;
   min-width: 300px;
-  max-width: 440px;
+  max-width: 400px;
   border-radius: var(--border-radius-lg);
-  border: none;
-  box-shadow: var(--shadow-lg);
-  font-size: 0.9rem;
-  font-weight: 500;
+  border: 1px solid;
+  box-shadow: var(--shadow);
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(12px);
+  animation: slideInAlert 250ms ease-out;
+  padding: 0.875rem 1rem;
+  letter-spacing: 0.2px;
+}
+
+@keyframes slideInAlert {
+  from {
+    opacity: 0;
+    transform: translateX(25px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideOutAlert {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px) scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alert { 
+    animation: none !important; 
+  }
+}
+
+.alert-success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+/* Danger Alert */
+.alert-danger {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+/* Warning Alert */
+.alert-warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+}
+
+/* Info Alert */
+.alert-info {
+  background: var(--color-info-light);
+  color: var(--color-info);
+  border-color: var(--color-info);
 }

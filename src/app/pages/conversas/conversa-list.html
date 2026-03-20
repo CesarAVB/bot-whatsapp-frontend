@@ -42,7 +42,7 @@
                     <span class="text-subtle">—</span>
                   }
                 </td>
-                <td class="text-muted" style="font-size:0.85rem">{{ c.updatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td class="meta-text">{{ c.updatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
                 <td class="text-end">
                   <a [routerLink]="[c.whatsappPhone]" class="btn btn-sm btn-outline-primary">
                     <i class="fa-solid fa-eye"></i>
@@ -63,7 +63,7 @@
 
       @if (totalPaginas > 1) {
         <div class="pagination-bar">
-          <span class="text-muted" style="font-size:0.85rem">Página {{ page + 1 }} de {{ totalPaginas }}</span>
+          <span class="meta-text">Página {{ page + 1 }} de {{ totalPaginas }}</span>
           <div class="btn-group btn-group-sm">
             <button class="btn btn-outline-secondary" [disabled]="page === 0" (click)="paginaAnterior()">
               <i class="fa-solid fa-chevron-left"></i>

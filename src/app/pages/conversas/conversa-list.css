@@ -1,9 +1,15 @@
 .table-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-xl);
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-base);
+}
+
+.table-card:hover {
   box-shadow: var(--shadow-sm);
+  border-color: var(--color-primary);
 }
 
 .phone-cell {
@@ -13,27 +19,37 @@
 }
 
 .phone-avatar {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--color-primary-light);
+  border: 1px solid var(--color-primary);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.875rem;
   flex-shrink: 0;
+  font-weight: 700;
 }
 
 .text-subtle {
   color: var(--color-subtle);
+  font-weight: 500;
+}
+
+.meta-text {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  font-weight: 500;
 }
 
 .pagination-bar {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 0.75rem var(--spacing-md);
   border-top: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--color-surface-raised);
+  gap: var(--spacing-md);
 }

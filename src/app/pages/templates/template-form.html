@@ -9,7 +9,13 @@
         <div>
           <h1 class="page-title"><i class="fa-solid fa-pen"></i>Editar Template</h1>
           @if (template) {
-            <p class="page-subtitle">{{ chave }}@if (template.descricao) { — {{ template.descricao }}}</p>
+            <p class="page-subtitle">
+              <span>{{ chave }}</span>
+              @if (template.descricao) {
+                <span> — </span>
+                <span>{{ template.descricao }}</span>
+              }
+            </p>
           }
         </div>
       </div>
@@ -64,7 +70,7 @@
                 <div class="auditoria-item">
                   <div class="auditoria-item__header">
                     <span class="fw-semibold">{{ a.alteradoPor || 'Sistema' }}</span>
-                    <span class="text-muted" style="font-size:0.82rem">{{ a.alteradoEm | date:'dd/MM/yyyy HH:mm' }}</span>
+                    <span class="audit-date">{{ a.alteradoEm | date:'dd/MM/yyyy HH:mm' }}</span>
                   </div>
                   <div class="auditoria-item__diff">
                     <div class="diff-antes"><strong>Antes</strong><pre>{{ a.textoAnterior }}</pre></div>

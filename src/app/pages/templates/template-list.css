@@ -4,28 +4,47 @@
   gap: var(--spacing-md);
 }
 
-/* ─── Template Card ──────────────────────────────── */
+/* ─── Template Card – Dark Mode ──────────────────– */
 .tpl-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-xl);
-  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.tpl-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
 }
 
 .tpl-card:hover {
-  box-shadow: var(--shadow);
-  border-color: #bfdbfe;
+  box-shadow: var(--shadow-sm);
+  border-color: var(--color-primary);
   transform: translateY(-2px);
+}
+
+.tpl-card:hover::before {
+  transform: scaleX(1);
 }
 
 .tpl-card__head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-sm);
 }
 
@@ -39,28 +58,29 @@
 
 .tpl-key-icon {
   font-size: 0.65rem;
-  color: var(--color-muted);
+  color: var(--color-primary);
   flex-shrink: 0;
+  font-weight: 700;
 }
 
 .tpl-key {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--color-primary);
   background: var(--color-primary-light);
-  padding: 2px 8px;
+  padding: 0.25rem 0.625rem;
   border-radius: 999px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   min-width: 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .tpl-badge {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  padding: 0.25em 0.65em;
+  padding: 0.3em 0.65em;
   border-radius: 999px;
   flex-shrink: 0;
 }
@@ -76,22 +96,27 @@
 }
 
 .tpl-desc {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--color-muted);
   margin: 0;
+  line-height: 1.4;
 }
 
 .tpl-preview {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: var(--color-text-secondary);
   margin: 0;
   flex: 1;
   white-space: pre-line;
-  line-height: 1.55;
+  line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  padding: var(--spacing-sm);
+  background: var(--color-surface-raised);
+  border-radius: var(--border-radius);
+  border-left: 2px solid var(--color-primary-light);
 }
 
 .tpl-card__foot {
@@ -99,23 +124,37 @@
   justify-content: space-between;
   align-items: center;
   padding-top: var(--spacing-sm);
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border);
   margin-top: auto;
 }
 
 .tpl-date {
-  font-size: 0.78rem;
-  color: var(--color-subtle);
+  font-size: 0.7rem;
+  color: var(--color-muted);
 }
 
-/* ─── Empty ──────────────────────────────────────── */
+/* ─── Empty State ────────────────────────────────– */
 .empty-grid {
   grid-column: 1 / -1;
   text-align: center;
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-2xl) var(--spacing-lg);
   color: var(--color-muted);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+.empty-grid__icon {
+  font-size: 2.25rem;
+  color: var(--color-subtle);
+  opacity: 0.5;
+}
+
+.empty-grid__text {
+  font-size: 0.875rem;
+  font-weight: 600;
 }
