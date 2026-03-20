@@ -1,1 +1,12 @@
-.alert { top: 1rem; right: 1rem; z-index: 1055; min-width: 300px; max-width: 500px; }
+.alert {
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1055;
+  min-width: 300px;
+  max-width: 440px;
+  border-radius: var(--border-radius-lg);
+  border: none;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.9rem;
+  font-weight: 500;
+}

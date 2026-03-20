@@ -1,66 +1,84 @@
-<div class="container py-4" style="max-width: 800px;">
-  <a routerLink="/templates" class="btn btn-sm btn-outline-secondary mb-3">
-    <i class="fa-solid fa-arrow-left me-1"></i>Voltar
-  </a>
+<div class="page-wrapper">
 
-  @if (template) {
-    <h1 class="h4 mb-1"><i class="fa-solid fa-pen me-2 text-primary"></i>Editar Template</h1>
-    <code class="text-muted mb-4 d-block">{{ chave }}</code>
-    @if (template.descricao) {
-      <p class="text-muted mb-3">{{ template.descricao }}</p>
-    }
-
-    <form [formGroup]="formulario" (ngSubmit)="salvar()">
-      <div class="mb-3">
-        <label for="texto" class="form-label fw-semibold">Texto da mensagem</label>
-        <textarea id="texto" formControlName="texto" class="form-control font-monospace" rows="8"
-                  placeholder="Texto exibido para o cliente..."></textarea>
-        <div class="form-text">Use <code>&#123;variavel&#125;</code> para placeholders dinâmicos (ex: <code>&#123;nome&#125;</code>, <code>&#123;data&#125;</code>).</div>
-        @if (formulario.get('texto')?.invalid && formulario.get('texto')?.touched) {
-          <div class="invalid-feedback d-block">O texto é obrigatório.</div>
-        }
+  <div class="page-header">
+    <div class="page-header__info">
+      <div class="detail-header">
+        <a routerLink="/templates" class="back-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div>
+          <h1 class="page-title"><i class="fa-solid fa-pen"></i>Editar Template</h1>
+          @if (template) {
+            <p class="page-subtitle">{{ chave }}@if (template.descricao) { — {{ template.descricao }}}</p>
+          }
+        </div>
       </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="carregarAuditoria()">
+      <i class="fa-solid fa-clock-rotate-left me-1"></i>
+      {{ mostrarAuditoria ? 'Ocultar' : 'Ver' }} Histórico
+    </button>
+  </div>
 
-      <div class="mb-4">
-        <label for="alteradoPor" class="form-label fw-semibold">Alterado por <span class="text-muted fw-normal">(opcional)</span></label>
-        <input id="alteradoPor" formControlName="alteradoPor" type="text" class="form-control"
-               placeholder="Seu nome ou e-mail para registro de auditoria" maxlength="100">
-      </div>
-
-      <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">
-          <i class="fa-solid fa-floppy-disk me-1"></i>Salvar
-        </button>
-        <a routerLink="/templates" class="btn btn-outline-secondary">Cancelar</a>
-        <button type="button" class="btn btn-outline-info ms-auto" (click)="carregarAuditoria()">
-          <i class="fa-solid fa-clock-rotate-left me-1"></i>
-          {{ mostrarAuditoria ? 'Ocultar' : 'Ver' }} Histórico
-        </button>
-      </div>
-    </form>
-
-    @if (mostrarAuditoria) {
-      <div class="mt-4">
-        <h2 class="h6 mb-3 text-muted"><i class="fa-solid fa-clock-rotate-left me-1"></i>Histórico de Alterações</h2>
-        @if (auditoria.length > 0) {
-          <div class="auditoria-lista">
-            @for (a of auditoria; track $index) {
-              <div class="auditoria-item">
-                <div class="auditoria-item__header">
-                  <span class="fw-medium">{{ a.alteradoPor || 'Sistema' }}</span>
-                  <span class="text-muted small">{{ a.alteradoEm | date:'dd/MM/yyyy HH:mm' }}</span>
-                </div>
-                <div class="auditoria-item__diff">
-                  <div class="diff-antes"><strong>Antes:</strong><pre>{{ a.textoAnterior }}</pre></div>
-                  <div class="diff-depois"><strong>Depois:</strong><pre>{{ a.textoNovo }}</pre></div>
-                </div>
-              </div>
+  <div class="page-body form-page-body">
+    @if (template) {
+      <div class="form-card">
+        <form [formGroup]="formulario" (ngSubmit)="salvar()">
+          <div class="mb-4">
+            <label for="texto" class="form-label">Texto da mensagem</label>
+            <textarea id="texto" formControlName="texto" class="form-control font-monospace" rows="10"
+                      placeholder="Texto exibido para o cliente..."></textarea>
+            <div class="form-text mt-1">
+              Use <code>&#123;variavel&#125;</code> para placeholders dinâmicos, ex: <code>&#123;nome&#125;</code>, <code>&#123;data&#125;</code>.
+            </div>
+            @if (formulario.get('texto')?.invalid && formulario.get('texto')?.touched) {
+              <div class="invalid-feedback d-block">O texto é obrigatório.</div>
             }
           </div>
-        } @else {
-          <p class="text-muted">Nenhuma alteração registrada.</p>
-        }
+
+          <div class="mb-4">
+            <label for="alteradoPor" class="form-label">
+              Alterado por <span class="fw-normal text-muted">(opcional)</span>
+            </label>
+            <input id="alteradoPor" formControlName="alteradoPor" type="text" class="form-control"
+                   placeholder="Nome ou e-mail para registro de auditoria" maxlength="100">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">
+              <i class="fa-solid fa-floppy-disk me-1"></i>Salvar alterações
+            </button>
+            <a routerLink="/templates" class="btn btn-outline-secondary">Cancelar</a>
+          </div>
+        </form>
       </div>
+
+      @if (mostrarAuditoria) {
+        <div class="audit-section">
+          <h2 class="audit-title">
+            <i class="fa-solid fa-clock-rotate-left me-2"></i>Histórico de Alterações
+          </h2>
+          @if (auditoria.length > 0) {
+            <div class="auditoria-lista">
+              @for (a of auditoria; track $index) {
+                <div class="auditoria-item">
+                  <div class="auditoria-item__header">
+                    <span class="fw-semibold">{{ a.alteradoPor || 'Sistema' }}</span>
+                    <span class="text-muted" style="font-size:0.82rem">{{ a.alteradoEm | date:'dd/MM/yyyy HH:mm' }}</span>
+                  </div>
+                  <div class="auditoria-item__diff">
+                    <div class="diff-antes"><strong>Antes</strong><pre>{{ a.textoAnterior }}</pre></div>
+                    <div class="diff-depois"><strong>Depois</strong><pre>{{ a.textoNovo }}</pre></div>
+                  </div>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="text-muted">Nenhuma alteração registrada.</p>
+          }
+        </div>
+      }
     }
-  }
+  </div>
+
 </div>

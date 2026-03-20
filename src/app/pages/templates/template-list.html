@@ -1,41 +1,49 @@
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h1 class="h3 mb-1"><i class="fa-solid fa-file-lines me-2 text-primary"></i>Templates de Mensagem</h1>
-      <p class="text-muted mb-0">{{ templates.length }} template(s) cadastrado(s)</p>
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header__info">
+      <h1 class="page-title"><i class="fa-solid fa-file-lines"></i>Templates de Mensagem</h1>
+      <p class="page-subtitle">{{ templates.length }} template(s) cadastrado(s)</p>
     </div>
-    <button class="btn btn-outline-primary" (click)="carregar()">
+    <button class="btn btn-outline-primary btn-sm" (click)="carregar()">
       <i class="fa-solid fa-rotate-right me-1"></i>Atualizar
     </button>
   </div>
 
-  <div class="row g-3">
-    @for (t of templates; track t.chave) {
-      <div class="col-12 col-md-6 col-xl-4">
-        <div class="template-card">
-          <div class="template-card__header">
-            <code class="template-card__chave">{{ t.chave }}</code>
-            <span class="badge" [class.bg-success]="t.ativo" [class.bg-secondary]="!t.ativo">
+  <div class="page-body">
+    <div class="template-grid">
+      @for (t of templates; track t.chave) {
+        <div class="tpl-card">
+          <div class="tpl-card__head">
+            <div class="tpl-key-wrap">
+              <i class="fa-solid fa-key tpl-key-icon"></i>
+              <code class="tpl-key">{{ t.chave }}</code>
+            </div>
+            <span class="tpl-badge" [class.tpl-badge--on]="t.ativo" [class.tpl-badge--off]="!t.ativo">
               {{ t.ativo ? 'Ativo' : 'Inativo' }}
             </span>
           </div>
+
           @if (t.descricao) {
-            <p class="template-card__descricao">{{ t.descricao }}</p>
+            <p class="tpl-desc">{{ t.descricao }}</p>
           }
-          <p class="template-card__preview">{{ preview(t.texto) }}</p>
-          <div class="template-card__footer">
-            <span class="text-muted small">Editado {{ t.updatedAt | date:'dd/MM/yyyy' }}</span>
+
+          <p class="tpl-preview">{{ preview(t.texto) }}</p>
+
+          <div class="tpl-card__foot">
+            <span class="tpl-date"><i class="fa-regular fa-calendar me-1"></i>{{ t.updatedAt | date:'dd/MM/yyyy' }}</span>
             <a [routerLink]="[t.chave, 'editar']" class="btn btn-sm btn-primary">
               <i class="fa-solid fa-pen me-1"></i>Editar
             </a>
           </div>
         </div>
-      </div>
-    } @empty {
-      <div class="col-12 text-center text-muted py-5">
-        <i class="fa-solid fa-file-circle-xmark fa-2x mb-2"></i>
-        <p>Nenhum template encontrado.</p>
-      </div>
-    }
+      } @empty {
+        <div class="empty-grid">
+          <i class="fa-solid fa-file-circle-xmark fa-2x"></i>
+          <p>Nenhum template encontrado.</p>
+        </div>
+      }
+    </div>
   </div>
+
 </div>

@@ -1,1 +1,16 @@
-.spinner-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+.spinner-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13,21,38,0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner-border {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-width: 0.2em;
+}

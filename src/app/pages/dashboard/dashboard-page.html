@@ -1,63 +1,74 @@
-<div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h1 class="h3 mb-1"><i class="fa-solid fa-gauge me-2 text-primary"></i>Dashboard Operacional</h1>
-      <p class="text-muted mb-0">Conversas ativas por estado do bot</p>
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header__info">
+      <h1 class="page-title"><i class="fa-solid fa-gauge-high"></i>Dashboard Operacional</h1>
+      <p class="page-subtitle">Conversas ativas por estado do bot</p>
     </div>
-    <button class="btn btn-outline-primary" (click)="carregarMetricas()">
+    <button class="btn btn-outline-primary btn-sm" (click)="carregarMetricas()">
       <i class="fa-solid fa-rotate-right me-1"></i>Atualizar
     </button>
   </div>
 
-  @if (metricas) {
-    <!-- Totalizador -->
-    <div class="row g-3 mb-4">
-      <div class="col-12 col-md-4">
-        <div class="card-metric card-metric--primary">
-          <div class="card-metric__icon"><i class="fa-solid fa-comments"></i></div>
-          <div class="card-metric__value">{{ metricas.totalConversas }}</div>
-          <div class="card-metric__label">Total de Conversas</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="card-metric card-metric--warning">
-          <div class="card-metric__icon"><i class="fa-solid fa-headset"></i></div>
-          <div class="card-metric__value">{{ getTotal(BotState.TRANSFERIDO) }}</div>
-          <div class="card-metric__label">Com Atendente Humano</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="card-metric card-metric--secondary">
-          <div class="card-metric__icon"><i class="fa-solid fa-circle-xmark"></i></div>
-          <div class="card-metric__value">{{ getTotal(BotState.ENCERRADO) }}</div>
-          <div class="card-metric__label">Encerradas</div>
-        </div>
-      </div>
-    </div>
+  <div class="page-body">
+    @if (metricas) {
 
-    <!-- Por estado -->
-    <h2 class="h5 mb-3 text-muted">Distribuição por Estado</h2>
-    <div class="row g-3">
-      @for (estado of estadosAtivos; track estado) {
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3 py-3">
-              <div class="estado-icone">
-                <i class="fa-solid {{ getEstadoIcone(estado) }}"></i>
-              </div>
-              <div>
-                <div class="fw-bold fs-5">{{ getTotal(estado) }}</div>
-                <div class="text-muted small">{{ getEstadoLabel(estado) }}</div>
-              </div>
-            </div>
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-card--blue">
+          <div class="kpi-card__body">
+            <div class="kpi-card__label">Total de Conversas</div>
+            <div class="kpi-card__value">{{ metricas.totalConversas }}</div>
+          </div>
+          <div class="kpi-card__icon-wrap">
+            <i class="fa-solid fa-comments"></i>
           </div>
         </div>
-      }
-    </div>
-  } @else {
-    <div class="text-center py-5 text-muted">
-      <i class="fa-solid fa-circle-notch fa-spin fa-2x mb-3"></i>
-      <p>Carregando métricas...</p>
-    </div>
-  }
+
+        <div class="kpi-card kpi-card--amber">
+          <div class="kpi-card__body">
+            <div class="kpi-card__label">Com Atendente Humano</div>
+            <div class="kpi-card__value">{{ getTotal(BotState.TRANSFERIDO) }}</div>
+          </div>
+          <div class="kpi-card__icon-wrap">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-card--slate">
+          <div class="kpi-card__body">
+            <div class="kpi-card__label">Encerradas</div>
+            <div class="kpi-card__value">{{ getTotal(BotState.ENCERRADO) }}</div>
+          </div>
+          <div class="kpi-card__icon-wrap">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estado distribution -->
+      <div class="section-header">
+        <h2 class="section-title">Distribuição por Estado</h2>
+      </div>
+
+      <div class="estado-grid">
+        @for (estado of estadosAtivos; track estado) {
+          <div class="estado-card">
+            <div class="estado-card__icon">
+              <i class="fa-solid {{ getEstadoIcone(estado) }}"></i>
+            </div>
+            <div class="estado-card__count">{{ getTotal(estado) }}</div>
+            <div class="estado-card__label">{{ getEstadoLabel(estado) }}</div>
+          </div>
+        }
+      </div>
+
+    } @else {
+      <div class="empty-state">
+        <i class="fa-solid fa-circle-notch fa-spin empty-state__icon"></i>
+        <p>Carregando métricas...</p>
+      </div>
+    }
+  </div>
+
 </div>
