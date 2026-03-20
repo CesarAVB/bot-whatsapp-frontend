@@ -126,6 +126,14 @@
   padding-top: var(--spacing-sm);
   border-top: 1px solid var(--color-border);
   margin-top: auto;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.tpl-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-left: auto;
 }
 
 .tpl-date {
