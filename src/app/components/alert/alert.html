@@ -1,0 +1,6 @@
+@if (alertService.alerta(); as alerta) {
+  <div class="alert {{ classeBootstrap }} alert-dismissible fade show position-fixed" role="alert">
+    {{ alerta.mensagem }}
+    <button type="button" class="btn-close" (click)="alertService.limpar()"></button>
+  </div>
+}

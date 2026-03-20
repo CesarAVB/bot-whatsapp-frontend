@@ -1,0 +1,43 @@
+<div class="container py-4">
+  <div class="mb-4">
+    <a routerLink="/conversas" class="btn btn-sm btn-outline-secondary mb-3">
+      <i class="fa-solid fa-arrow-left me-1"></i>Voltar
+    </a>
+    @if (conversa) {
+      <div class="d-flex flex-wrap gap-3 align-items-center">
+        <div>
+          <h1 class="h4 mb-1"><i class="fa-solid fa-comment-dots me-2 text-primary"></i>{{ conversa.whatsappPhone }}</h1>
+          <p class="text-muted mb-0">Iniciada em {{ conversa.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+        <app-badge-status [valor]="conversa.currentState" />
+        @if (conversa.chatwootConversationId) {
+          <span class="badge bg-info text-dark fs-6">#{{ conversa.chatwootConversationId }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  @if (conversa) {
+    <div class="timeline">
+      @for (msg of conversa.historico; track $index) {
+        <div class="timeline-item" [class.timeline-item--enviada]="msg.direcao === Direcao.ENVIADA">
+          <div class="timeline-bubble">
+            <div class="timeline-bubble__meta">
+              <span class="badge" [class.bg-success]="msg.direcao === Direcao.RECEBIDA" [class.bg-primary]="msg.direcao === Direcao.ENVIADA">
+                <i class="fa-solid" [class.fa-arrow-down]="msg.direcao === Direcao.RECEBIDA" [class.fa-arrow-up]="msg.direcao === Direcao.ENVIADA"></i>
+                {{ msg.direcao }}
+              </span>
+              <span class="text-muted small">{{ msg.createdAt | date:'HH:mm dd/MM' }}</span>
+            </div>
+            <p class="timeline-bubble__text">{{ msg.conteudo }}</p>
+          </div>
+        </div>
+      } @empty {
+        <div class="text-center text-muted py-5">
+          <i class="fa-solid fa-inbox fa-2x mb-2"></i>
+          <p>Nenhuma mensagem registrada ainda.</p>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,64 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h3 mb-1"><i class="fa-solid fa-comments me-2 text-primary"></i>Conversas</h1>
+      <p class="text-muted mb-0">{{ totalElements }} conversa(s) registrada(s)</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="carregar()">
+      <i class="fa-solid fa-rotate-right me-1"></i>Atualizar
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Telefone</th>
+          <th>Estado</th>
+          <th>Chatwoot</th>
+          <th>Última atualização</th>
+          <th class="text-end">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of conversas; track c.whatsappPhone) {
+          <tr>
+            <td class="fw-medium">{{ formatarPhone(c.whatsappPhone) }}</td>
+            <td><app-badge-status [valor]="c.currentState" /></td>
+            <td>
+              @if (c.chatwootConversationId) {
+                <span class="badge bg-info text-dark">#{{ c.chatwootConversationId }}</span>
+              } @else {
+                <span class="text-muted">—</span>
+              }
+            </td>
+            <td class="text-muted small">{{ c.updatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td class="text-end">
+              <a [routerLink]="[c.whatsappPhone]" class="btn btn-sm btn-outline-primary">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="text-center text-muted py-4">Nenhuma conversa encontrada.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (totalPaginas > 1) {
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <span class="text-muted small">Página {{ page + 1 }} de {{ totalPaginas }}</span>
+      <div class="btn-group">
+        <button class="btn btn-outline-secondary btn-sm" [disabled]="page === 0" (click)="paginaAnterior()">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" [disabled]="page + 1 >= totalPaginas" (click)="proximaPagina()">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  }
+</div>

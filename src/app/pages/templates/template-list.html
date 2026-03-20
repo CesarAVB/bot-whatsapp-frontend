@@ -1,0 +1,41 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h3 mb-1"><i class="fa-solid fa-file-lines me-2 text-primary"></i>Templates de Mensagem</h1>
+      <p class="text-muted mb-0">{{ templates.length }} template(s) cadastrado(s)</p>
+    </div>
+    <button class="btn btn-outline-primary" (click)="carregar()">
+      <i class="fa-solid fa-rotate-right me-1"></i>Atualizar
+    </button>
+  </div>
+
+  <div class="row g-3">
+    @for (t of templates; track t.chave) {
+      <div class="col-12 col-md-6 col-xl-4">
+        <div class="template-card">
+          <div class="template-card__header">
+            <code class="template-card__chave">{{ t.chave }}</code>
+            <span class="badge" [class.bg-success]="t.ativo" [class.bg-secondary]="!t.ativo">
+              {{ t.ativo ? 'Ativo' : 'Inativo' }}
+            </span>
+          </div>
+          @if (t.descricao) {
+            <p class="template-card__descricao">{{ t.descricao }}</p>
+          }
+          <p class="template-card__preview">{{ preview(t.texto) }}</p>
+          <div class="template-card__footer">
+            <span class="text-muted small">Editado {{ t.updatedAt | date:'dd/MM/yyyy' }}</span>
+            <a [routerLink]="[t.chave, 'editar']" class="btn btn-sm btn-primary">
+              <i class="fa-solid fa-pen me-1"></i>Editar
+            </a>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="col-12 text-center text-muted py-5">
+        <i class="fa-solid fa-file-circle-xmark fa-2x mb-2"></i>
+        <p>Nenhum template encontrado.</p>
+      </div>
+    }
+  </div>
+</div>
