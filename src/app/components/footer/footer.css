@@ -6,19 +6,20 @@
   color: var(--color-subtle);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--spacing-md);
   font-weight: 500;
   letter-spacing: 0.2px;
+  text-align: center;
 }
 
 .app-footer a {
-  color: var(--color-muted);
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
   transition: color var(--transition-fast);
 }
 
 .app-footer a:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-hover);
 }

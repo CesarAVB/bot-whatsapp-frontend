@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner';
 import { AlertComponent } from './components/alert/alert';
 import { FooterComponent } from './components/footer/footer';
 import { NavbarComponent } from './components/navbar/navbar';
+import { SidebarService } from './services/sidebar';
 
 @Component({
   selector: 'app-root',
@@ -12,4 +13,6 @@ import { NavbarComponent } from './components/navbar/navbar';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly sidebarService = inject(SidebarService);
+}

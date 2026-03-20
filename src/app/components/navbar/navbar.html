@@ -1,35 +1,41 @@
-<aside class="sidebar">
-  <div class="sidebar__brand">
-    <div class="sidebar__brand-icon">
-      <i class="fa-solid fa-robot"></i>
-    </div>
-    <div>
-      <div class="sidebar__brand-name">ASB Bot</div>
-      <div class="sidebar__brand-sub">Painel Admin</div>
+<aside class="sidebar" [class.collapsed]="sidebarService.isCollapsed()">
+  <div class="sidebar__header">
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-icon">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <div>
+        <div class="sidebar__brand-name">ASB Bot</div>
+        <div class="sidebar__brand-sub">Painel Admin</div>
+      </div>
     </div>
   </div>
+
+  <button class="sidebar__toggle" (click)="toggleSidebar()" title="Expandir/Colapsar">
+    <i class="fa-solid" [class]="sidebarService.isCollapsed() ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
+  </button>
 
   <nav class="sidebar__nav">
     <span class="sidebar__section-label">Menu</span>
 
     <a class="sidebar__link" routerLink="/dashboard" routerLinkActive="sidebar__link--active">
       <i class="fa-solid fa-gauge-high sidebar__link-icon"></i>
-      <span>Dashboard</span>
+      <span class="sidebar__link-text">Dashboard</span>
     </a>
 
     <a class="sidebar__link" routerLink="/conversas" routerLinkActive="sidebar__link--active">
       <i class="fa-solid fa-comments sidebar__link-icon"></i>
-      <span>Conversas</span>
+      <span class="sidebar__link-text">Conversas</span>
     </a>
 
     <a class="sidebar__link" routerLink="/templates" routerLinkActive="sidebar__link--active">
       <i class="fa-solid fa-file-lines sidebar__link-icon"></i>
-      <span>Templates</span>
+      <span class="sidebar__link-text">Templates</span>
     </a>
   </nav>
 
   <div class="sidebar__footer">
     <div class="sidebar__status-dot"></div>
-    <span>Sistema online</span>
+    <span class="sidebar__footer-text">Sistema online</span>
   </div>
 </aside>

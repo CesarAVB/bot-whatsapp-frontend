@@ -203,6 +203,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   flex-direction: column;
   min-height: 100vh;
   background: var(--color-bg);
+  transition: margin-left var(--transition-base);
+}
+
+/* Adjust margin when sidebar is collapsed */
+.app-shell.collapsed .app-main {
+  margin-left: var(--sidebar-width-compact);
 }
 
 .app-content {

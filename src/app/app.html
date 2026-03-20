@@ -1,6 +1,6 @@
 <app-spinner />
 <app-alert />
-<div class="app-shell">
+<div class="app-shell" [class.collapsed]="sidebarService.isCollapsed()">
   <app-navbar />
   <div class="app-main">
     <div class="app-content">
