@@ -4,10 +4,6 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![RxJS](https://img.shields.io/badge/RxJS-7.8-B7178C?logo=reactivex&logoColor=white)](https://rxjs.dev/)
 [![Node](https://img.shields.io/badge/Node.js-22%2B-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-CesarAVB%2Fbot--whatsapp--frontend-181717?logo=github&logoColor=white)](https://github.com/CesarAVB/bot-whatsapp-frontend)
-[![Last Commit](https://img.shields.io/github/last-commit/CesarAVB/bot-whatsapp-frontend)](https://github.com/CesarAVB/bot-whatsapp-frontend/commits/main)
-[![Issues](https://img.shields.io/github/issues/CesarAVB/bot-whatsapp-frontend)](https://github.com/CesarAVB/bot-whatsapp-frontend/issues)
-[![Stars](https://img.shields.io/github/stars/CesarAVB/bot-whatsapp-frontend?style=social)](https://github.com/CesarAVB/bot-whatsapp-frontend/stargazers)
 
 Painel administrativo para operação do bot de atendimento WhatsApp da ASB Telecom. A aplicação centraliza monitoramento de conversas, métricas operacionais e gestão de templates com histórico de auditoria.
 
